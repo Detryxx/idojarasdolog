@@ -37,8 +37,8 @@ def get_weather(city=str):
         error_code = ast.literal_eval(response_API.text).get("error").get("code")
         return error_code
     else:  # if good, returns the requested data
-        return city, temp, condition
- 
- 
+        return city.title(), temp, condition
+
+
 if __name__ == "__main__":
     gui.launch()
