@@ -1,24 +1,29 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter.font as tkfont
+from tkinter import PhotoImage
 
 import app
 
 #setup
 root = Tk()
 root.title("idojaras app")
-root.geometry("300x500")
+root.geometry("350x500")
 frm = ttk.Frame(root, padding=30)
 frm.grid()
 
 title_font = tkfont.Font(size=25)
-
 #UI\
 elements = {
+"logo": ttk.Label(frm,
+        text="⋆｡˚ ☁︎ ˚｡⋆｡˚☽˚｡⋆ ",
+        font=title_font
+        ).grid(column=0, row=0),
+        
 "title": ttk.Label(frm,
         text="idojarasos app", 
         font=title_font
-        ).grid(column=0, row=0),
+        ).grid(column=0, row=1),
 
 "city_entry_text": ttk.Label(frm,
           text="Enter city name: "
