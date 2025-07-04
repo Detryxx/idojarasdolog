@@ -7,7 +7,11 @@ import requests
 import ast
 import gui
  
- 
+api_errors = {
+    1006: "City not found",
+    1003: "No input"
+}
+
 def get_weather(city=str):
     """
     Keyword Arguments:

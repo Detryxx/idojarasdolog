@@ -28,14 +28,25 @@ elements = {
         ),
 
 "warning": ttk.Label(frm, 
-        text="error",
+        text="",
         foreground="red"
         ),
 
-"exit": ttk.Button(frm, 
-        text="Quit", 
-        command=root.destroy
-        ).grid(column=0, row=10),
+"submit": ttk.Button(frm, 
+        text="submit",
+        ),
+
+"city": ttk.Label(frm, 
+        text="",
+        ),
+
+"temp": ttk.Label(frm, 
+        text="",
+        ),
+
+"contition": ttk.Label(frm, 
+        text="",
+        ),
 }
 
 #logic
@@ -44,22 +55,26 @@ def launch():
     root.mainloop()
 
 def warning(message:str):
-    elements["warning"].text = message
-    elements["warning"].grid(column=0, row=4)
+    elements["warning"].config(text=message)
     print(message)
 
 def refresh_info():
     city_input = elements["city_entry"].get()
     info = app.get_weather(city_input)
-    if info is not str:
-        pass
+    if type(info) is int:
+        warning(app.api_errors.get(info) or f"Error code: {info}")
     else:
-        warning(f"error: {type(info)}")
+        warning('')
+        elements["city"].config(text=f"city: {info[0]}")
+        elements["temp"].config(text=f"tempeture: {info[1]}c")
+        elements["contition"].config(text=f"condition: {info[2]}")
     
-
+#manual grid setup for non-statis elements
 elements["city_entry"].bind("<Return>", lambda event: refresh_info())
 elements["city_entry"].grid(column=0, row=3)
 elements["warning"].grid(column=0, row=4)
-
-if __name__ == "__main__": #testing UI
-    launch()
+elements["submit"].config(command=refresh_info)
+elements["submit"].grid(column=0, row=5)
+elements["city"].grid(column=0, row=6)
+elements["temp"].grid(column=0, row=7)
+elements["contition"].grid(column=0, row=8)
