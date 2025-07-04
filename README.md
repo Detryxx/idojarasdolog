@@ -8,13 +8,13 @@ A simple weather application built with Python and Tkinter that fetches current 
 - Display temperature in Celsius
 - Shows city name and weather condition description
 - Error handling for invalid cities or API issues
-- Simple and intuitive GUI interface
+- Simple and intuitive GUI
 
 ## File Structure
 
 ```
 ├── app.py          # Main application logic and API handling
-└── gui.py          # GUI interface using Tkinter
+└── gui.py          # GUI using Tkinter
 ```
 
 ## Requirements
@@ -35,7 +35,7 @@ A simple weather application built with Python and Tkinter that fetches current 
     ```bash
     python app.py
     ```
-This will launch the GUI interface where you can:
+This will launch the GUI where you can:
 1. Enter a city name in the input field
 2. Click "Submit" or press Enter to get weather information
 3. View the results including city name, temperature, and weather condition
