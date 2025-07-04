@@ -2,11 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.font as tkfont
 
-textVar = {
-    "title": "idojarasos app",
-
-}
-
+import app
 
 #setup
 root = Tk()
@@ -17,28 +13,53 @@ frm.grid()
 
 title_font = tkfont.Font(size=25)
 
-#UI
-ttk.Label(frm,
-        name="title",
-        text=textVar["Title"], 
+#UI\
+elements = {
+"title": ttk.Label(frm,
+        text="idojarasos app", 
         font=title_font
-        ).grid(column=0, row=0)
+        ).grid(column=0, row=0),
 
-ttk.Label(frm, 
+"city_entry_text": ttk.Label(frm,
           text="Enter city name: "
-        ).grid(column=0, row=2)
+        ).grid(column=0, row=2),
 
-city_entry = ttk.Entry(frm,
-        
-        ).grid(column=0, row=3)
+"city_entry": ttk.Entry(frm
+        ),
 
-ttk.Button(frm, 
+"warning": ttk.Label(frm, 
+        text="error",
+        foreground="red"
+        ),
+
+"exit": ttk.Button(frm, 
         text="Quit", 
         command=root.destroy
-        ).grid(column=0, row=10)
+        ).grid(column=0, row=10),
+}
+
+#logic
 
 def launch():
     root.mainloop()
+
+def warning(message:str):
+    elements["warning"].text = message
+    elements["warning"].grid(column=0, row=4)
+    print(message)
+
+def refresh_info():
+    city_input = elements["city_entry"].get()
+    info = app.get_weather(city_input)
+    if info is not str:
+        pass
+    else:
+        warning(f"error: {type(info)}")
+    
+
+elements["city_entry"].bind("<Return>", lambda event: refresh_info())
+elements["city_entry"].grid(column=0, row=3)
+elements["warning"].grid(column=0, row=4)
 
 if __name__ == "__main__": #testing UI
     launch()
